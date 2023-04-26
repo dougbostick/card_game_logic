@@ -36,10 +36,11 @@ const playerHandDiv = document.querySelector('#playerCards')
 const dealerHandDiv = document.querySelector('#dealerCards')
 const playerVal = document.querySelector('#playerValue')
 const dealerVal = document.querySelector('#dealerValue')
-
+const gameStatusElm = document.querySelector('#gameStatus')
 
 const playerHand = [];
 const dealerHand = [];
+let gameResult = '';
 
 const playerDraw = () => {
     console.log('player draw')
@@ -54,6 +55,10 @@ const playerDraw = () => {
         return a;
     }, 0)
     playerVal.innerText = cardVal;
+    if(cardVal > 21){
+        gameResult = 'You went over 21! You lose!';
+        gameStatusElm.innerText = gameResult;
+    }
 }
 
 const dealerDraw = () => {
@@ -70,6 +75,10 @@ const dealerDraw = () => {
         return a;
     }, 0)
     dealerVal.innerText = cardVal;
+    if(cardVal > 21){
+        gameResult = 'Dealer went over 21! You win!';
+        gameStatusElm.innerText = gameResult;
+    }
 }
 
 const hitMeBtn = document.querySelector('#hit_me')
@@ -91,6 +100,7 @@ const startGame = () => {
     dealerDraw()
     playerDraw()
 }
+
 
 startGame();
 // console.log(draw(deck))
