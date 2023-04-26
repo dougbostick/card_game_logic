@@ -6,21 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Jack</title>
     <script defer src="index.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="cardsDiv">
-        <div id="dealerHand">
-            <h1>DEALER</h1>
-            <div id="dealerCards"></div>
-        </div>
-        <div id="playerHand">
-            <h1>PLAYER</h1>
-            <div id="dealerCards"></div>
-
-        </div>
+      <div id="dealerHand">
+        <h1>DEALER</h1>
+        <div id="dealerCards"></div>
+        <h2>Card Value: <span id="dealerValue"></span></h2>
+      </div>
+      <div id="playerHand">
+        <h1>PLAYER</h1>
+        <div id="playerCards"></div>
+        <h2>Card Value: <span id="playerValue"></span></h2>
+      </div>
     </div>
-    
-    <button id="hit_me">HIT ME!</button>
+    <div id="buttons">
+      <button id="dealer_draw">DEALER DRAW!</button>
+      <button id="hit_me">HIT ME!</button>
+    </div>
   </body>
 </html>

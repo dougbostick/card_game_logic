@@ -32,8 +32,11 @@ const draw = (deckObj) => {
     }
     return {cardName: `${randomCard} of ${randomSuit}`, cardVal: cardValue};
 }
-const playerHandDiv = document.querySelector('#playerHand')
-const dealerHandDiv = document.querySelector('#dealerHand')
+const playerHandDiv = document.querySelector('#playerCards')
+const dealerHandDiv = document.querySelector('#dealerCards')
+const playerVal = document.querySelector('#playerValue')
+const dealerVal = document.querySelector('#dealerValue')
+
 
 const playerHand = [];
 const dealerHand = [];
@@ -46,6 +49,11 @@ const playerDraw = () => {
     cardElm.classList.add('playerCard')
     cardElm.innerText = `${card.cardName}`
     playerHandDiv.append(cardElm);
+    const cardVal = playerHand.reduce((a, c) => {
+        a += c.cardVal;
+        return a;
+    }, 0)
+    playerVal.innerText = cardVal;
 }
 
 const dealerDraw = () => {
@@ -57,6 +65,11 @@ const dealerDraw = () => {
     cardElm.classList.add('dealererCard')
     cardElm.innerText = `${card.cardName}`
     dealerHandDiv.append(cardElm);
+    const cardVal = dealerHand.reduce((a, c) => {
+        a += c.cardVal;
+        return a;
+    }, 0)
+    dealerVal.innerText = cardVal;
 }
 
 const hitMeBtn = document.querySelector('#hit_me')
@@ -64,6 +77,12 @@ const hitMeBtn = document.querySelector('#hit_me')
 hitMeBtn.addEventListener('click', () => {
     console.log('hit me')
     playerDraw();
+})
+
+const dealerDrawBtn = document.querySelector('#dealer_draw');
+
+dealerDrawBtn.addEventListener('click', () => {
+    dealerDraw();
 })
 
 const startGame = () => {

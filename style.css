@@ -29,6 +29,9 @@ body{
 
 }
 
-#hit_me {
-
+#buttons {
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    /* border: 1px solid black; */
 }
