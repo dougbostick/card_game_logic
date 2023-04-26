@@ -5,15 +5,23 @@ const deck = {
     spades: [2, 3, 4, 5, 6, 7, 8, 9, 10, 'jack', 'queen', 'king', 'ace']
 }
 
+const findSuit = () => Math.floor(Math.random() * 4)
+
+const findIdx = () => Math.floor(Math.random() * 13);
+
 const draw = (deckObj) => {
     const suits = ['hearts', 'clubs', 'diamonds', 'spades'];
-    const randomIdx = Math.floor(Math.random() * 13);
-    const randomSuitNum = Math.floor(Math.random() * 4)
+    let randomIdx = findIdx();
+    let randomSuitNum = findSuit();
     const randomSuit = suits[randomSuitNum]
-    const randomCard = deckObj[randomSuit][randomIdx]
+    let randomCard = deckObj[randomSuit][randomIdx]
+    while(!randomCard){
+        randomIdx = findIdx();
+        randomSuitNum = findSuit();
+        randomCard = deckObj[randomSuit][randomIdx]
+    }
     console.log(`${randomCard} of ${randomSuit}`)
     deckObj[randomSuit].splice(randomIdx, 1);
-    // console.log(deckObj)
     let cardValue = 0;
     if(randomIdx === 12) {
         cardValue = 1;
@@ -24,15 +32,47 @@ const draw = (deckObj) => {
     }
     return {cardName: `${randomCard} of ${randomSuit}`, cardVal: cardValue};
 }
+const playerHandDiv = document.querySelector('#playerHand')
+const dealerHandDiv = document.querySelector('#dealerHand')
 
-// const playerHand = [];
-// const dealerhand = [];
+const playerHand = [];
+const dealerHand = [];
 
-const playerDraw = (deckObj, playerHand) => {
-    const card = draw(deckObj)
+const playerDraw = () => {
+    console.log('player draw')
+    const card = draw(deck)
     playerHand.push(card)
-    console.log(playerHand)
-
+    const cardElm = document.createElement('div');
+    cardElm.classList.add('playerCard')
+    cardElm.innerText = `${card.cardName}`
+    playerHandDiv.append(cardElm);
 }
+
+const dealerDraw = () => {
+    console.log('dealer draw')
+
+    const card = draw(deck)
+    dealerHand.push(card)
+    const cardElm = document.createElement('div');
+    cardElm.classList.add('dealererCard')
+    cardElm.innerText = `${card.cardName}`
+    dealerHandDiv.append(cardElm);
+}
+
+const hitMeBtn = document.querySelector('#hit_me')
+
+hitMeBtn.addEventListener('click', () => {
+    console.log('hit me')
+    playerDraw();
+})
+
+const startGame = () => {
+    dealerDraw()
+    playerDraw()
+    dealerDraw()
+    playerDraw()
+}
+
+startGame();
 // console.log(draw(deck))
-console.log(playerDraw(deck, []));
+// console.log(playerDraw());
